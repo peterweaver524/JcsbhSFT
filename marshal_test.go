@@ -13,9 +13,6 @@ func Test_NewRequestMarshaler(t *testing.T) {
 		t.Fatal("failed to create Request marshaler")
 	}
 }
-
-func Test_MarshalUncompressed(t *testing.T) {
-	rm := NewRequestMarshaler()
 	r := &QueryRequest{
 		Request: &Request{
 			Statements: []*Statement{
@@ -37,7 +34,6 @@ func Test_MarshalUncompressed(t *testing.T) {
 	}
 
 	c := &Command{
-		Type:       Command_COMMAND_TYPE_QUERY,
 		SubCommand: b,
 		Compressed: comp,
 	}
@@ -93,7 +89,6 @@ func Test_MarshalCompressedBatch(t *testing.T) {
 		Freshness: 100,
 	}
 
-	b, comp, err := rm.Marshal(r)
 	if err != nil {
 		t.Fatalf("failed to marshal QueryRequest: %s", err)
 	}
